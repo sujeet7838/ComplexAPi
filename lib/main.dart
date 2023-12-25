@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_project_structure/features/category_page.dart';
+import 'package:flutter_project_structure/features/combo_categ.dart';
 import 'package:flutter_project_structure/features/home_page.dart';
 import 'package:flutter_project_structure/features/user_page.dart';
 
@@ -23,7 +24,8 @@ class MyApp extends StatelessWidget {
           appBar: AppBar(
               // title: const Text("API Test Demo"),
               ),
-          body: const CategoryPage(),
+          body: const ComboCategory(),
+          //onst CategoryPage(),
           //const UserPage(),
           //const HomePage(),
         ));
