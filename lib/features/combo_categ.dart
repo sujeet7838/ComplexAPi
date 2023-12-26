@@ -12,6 +12,7 @@ class ComboCategory extends StatefulWidget {
 }
 
 class _ComboCategoryState extends State<ComboCategory> {
+  var newData;
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<ComboCategoryModel>(
@@ -40,22 +41,29 @@ class _ComboCategoryState extends State<ComboCategory> {
                   ),
                 ),
                 Container(
-                  height: 250,
-                  padding: const EdgeInsets.all(8),
-                  margin:
-                      const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-                  decoration: BoxDecoration(
-                    color: Colors.lightBlue,
-                    borderRadius: BorderRadius.circular(20),
-                  ),
+                  height: 350,
+                  // padding: const EdgeInsets.all(8),
+                  // margin:
+                  //     const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                  // decoration: BoxDecoration(
+                  //   color: Colors.lightBlue,
+                  //   borderRadius: BorderRadius.circular(20),
+                  // ),
                   child: ListView.builder(
                       itemCount: snapshort.data!.data.lunchCombo.details.length,
                       itemBuilder: (context, index) {
                         return Container(
-                          margin: const EdgeInsets.symmetric(
+                          width: double.infinity,
+                          decoration: BoxDecoration(
+                              color: Colors.grey,
+                              borderRadius: BorderRadius.circular(10)),
+                          margin: const EdgeInsets.all(8),
+                          // margin: const EdgeInsets.only(bottom: 10),
+                          padding: const EdgeInsets.symmetric(
                               horizontal: 10, vertical: 10),
-                          color: Colors.grey,
                           child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.start,
                             children: [
                               Row(
                                 children: [
@@ -63,8 +71,8 @@ class _ComboCategoryState extends State<ComboCategory> {
                                     image: NetworkImage(
                                       'https://click4technologies.com/design/t20/bollywood-restarant/${snapshort.data!.data.lunchCombo.details[index].productImage}',
                                     ),
-                                    fit: BoxFit.fill,
-                                    height: 100.0,
+                                    fit: BoxFit.cover,
+                                    height: 80.0,
                                   ),
                                   Column(
                                     children: [
@@ -75,9 +83,44 @@ class _ComboCategoryState extends State<ComboCategory> {
                                           .details[index].productDescription
                                           .toString()),
                                     ],
-                                  )
+                                  ),
+                                  const SizedBox(
+                                    height: 10,
+                                  ),
                                 ],
                               ),
+                              Container(
+                                  margin: const EdgeInsets.symmetric(
+                                      horizontal: 10, vertical: 10),
+                                  height: 50,
+                                  width: double.infinity,
+                                  decoration: BoxDecoration(
+                                      color: Colors.green,
+                                      borderRadius: BorderRadius.circular(10)),
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 10, vertical: 10),
+                                  child: DropdownButton(
+                                      value: newData,
+                                      isDense: true,
+                                      underline: Container(),
+                                      hint: const Text('Select value'),
+                                      isExpanded: true,
+                                      icon:
+                                          const Icon(Icons.keyboard_arrow_down),
+                                      items: snapshort.data!.data.lunchCombo
+                                          .details[index].productVariation
+                                          .map((item) {
+                                        return DropdownMenuItem(
+                                          value:
+                                              item.variationValueId.toString(),
+                                          child: Text(item.variationValueName
+                                              .toString()),
+                                        );
+                                      }).toList(),
+                                      onChanged: (value) {
+                                        newData = value;
+                                        setState(() {});
+                                      }))
                             ],
                           ),
                         );
@@ -103,7 +146,7 @@ class _ComboCategoryState extends State<ComboCategory> {
                   ),
                 ),
                 Container(
-                  height: 250,
+                  height: 150,
                   padding: const EdgeInsets.all(8),
                   margin:
                       const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
@@ -119,7 +162,7 @@ class _ComboCategoryState extends State<ComboCategory> {
                           margin: const EdgeInsets.symmetric(
                               horizontal: 10, vertical: 10),
                           color: Colors.grey,
-                          child: Column(
+                          child: const Column(
                             children: [
                               // Row(
                               //   children: [
